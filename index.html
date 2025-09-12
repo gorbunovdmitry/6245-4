@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выберите формат NFC + QR-кода</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VNG605KE2R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-VNG605KE2R");
+    </script>
+    
+    <!-- Yandex Metrika -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        ym(96171108, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/96171108" style="position:absolute; left:-9999px;" alt="" /></div></noscript></head>
+<body>
+    <div class="container">
+        <div class="text-block">
+            <h2 class="text-block-title">Получайте оплату, не&nbsp;доставая телефон</h2>
+            <p class="text-block-description">Вашим клиентам нужно будет только отсканировать NFC + QR или приложить телефон для оплаты</p>
+        </div>
+        
+        <h1 class="title">Выберите формат NFC + QR-кода</h1>
+        
+        <div class="products-grid">
+            <!-- Браслет -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="images/bracelet.png" alt="Браслет">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Браслет</h3>
+                    <p class="product-features">NFC + QR</p>
+                    <button class="product-button" data-product="bracelet" data-price="699" data-state="price">
+                        699 ₽
+                    </button>
+                </div>
+            </div>
+
+            <!-- Карта -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="images/card.png" alt="Карта">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Карта</h3>
+                    <p class="product-features">NFC + QR</p>
+                    <button class="product-button" data-product="card" data-price="499" data-state="price">
+                        499 ₽
+                    </button>
+                </div>
+            </div>
+
+            <!-- Брелок -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="images/trinket.png" alt="Брелок">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Брелок</h3>
+                    <p class="product-features">NFC + QR</p>
+                    <button class="product-button" data-product="trinket" data-price="499" data-state="price">
+                        499 ₽
+                    </button>
+                </div>
+            </div>
+
+            <!-- Наклейка -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="images/sticker.png" alt="Наклейка">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Наклейка</h3>
+                    <p class="product-features">NFC + QR</p>
+                    <button class="product-button" data-product="sticker" data-price="499" data-state="price">
+                        499 ₽
+                    </button>
+                </div>
+            </div>
+
+            <!-- Карта на подставке -->
+            <div class="product-card product-card-wide">
+                <div class="product-image-container">
+                    <img src="images/stand.png" alt="Карта на подставке">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Карта на подставке</h3>
+                    <p class="product-features">NFC + QR</p>
+                    <button class="product-button" data-product="stand" data-price="999" data-state="price">
+                        999 ₽
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <button class="continue-button" id="continueButton" disabled>
+            Выберите хотя бы 1 товар
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

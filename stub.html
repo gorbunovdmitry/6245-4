@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Только тсCC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VNG605KE2R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-VNG605KE2R");
+    </script>
+    
+    <!-- Yandex Metrika -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        ym(96171108, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/96171108" style="position:absolute; left:-9999px;" alt="" /></div></noscript>    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 100%;
+            padding: 20px;
+        }
+
+        .moai-image {
+            width: 100%;
+            height: auto;
+            margin: 0 auto 40px;
+            background-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .moai-image img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .main-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 30px;
+            line-height: 1.1;
+        }
+
+        .body-text {
+            font-size: 18px;
+            font-weight: 400;
+            color: #000;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .final-message {
+            font-size: 16px;
+            font-weight: 400;
+            color: #000;
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 36px;
+            }
+            
+            .body-text {
+                font-size: 16px;
+            }
+            
+            .moai-image {
+                width: 150px;
+                height: 150px;
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 28px;
+            }
+            
+            .body-text {
+                font-size: 14px;
+            }
+            
+            .moai-image {
+                width: 120px;
+                height: 120px;
+                margin-bottom: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="moai-image">
+            <img src="images/pashi.png" alt="Pashi">
+        </div>
+        <h1 class="main-title">Только тссс</h1>
+        <p class="body-text">
+            Вы поучаствовали в очень важном<br>
+            исследовании, которое поможет улучшить<br>
+            продукт. Вы – наш герой!
+        </p>
+        <p class="final-message">Продукта не существует</p>
+    </div>
+
+    <script>
+        // Запрещаем все способы навигации
+        window.addEventListener('beforeunload', function(e) {
+            e.preventDefault();
+            e.returnValue = '';
+        });
+
+        // Запрещаем закрытие страницы
+        window.addEventListener('unload', function(e) {
+            e.preventDefault();
+        });
+
+        // Запрещаем навигацию назад
+        window.addEventListener('popstate', function(e) {
+            history.pushState(null, null, location.href);
+        
+        // Отправляем событие просмотра заглушки
+        function sendEndPageViewEvent() {
+            // Google Analytics
+            if (typeof gtag !== "undefined") {
+                gtag("event", "6245_end_page_view_var4");
+            }
+            
+            // Yandex Metrika
+            if (typeof ym !== "undefined") {
+                ym(96171108, "reachGoal", "6245_end_page_view_var4");
+            }
+        }
+        
+        // Отправляем событие при загрузке страницы
+        sendEndPageViewEvent();        });
+
+        // Блокируем контекстное меню
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Блокируем выделение текста
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+        });
+
+        // Блокируем перетаскивание
+        document.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+        });
+
+        // Блокируем горячие клавиши
+        document.addEventListener('keydown', function(e) {
+            // F5, Ctrl+R, Ctrl+Shift+R, Ctrl+F5
+            if (e.key === 'F5' || 
+                (e.ctrlKey && e.key === 'r') || 
+                (e.ctrlKey && e.shiftKey && e.key === 'R') ||
+                (e.ctrlKey && e.key === 'F5')) {
+                e.preventDefault();
+            }
+            
+            // Alt + Left Arrow (назад)
+            if (e.altKey && e.key === 'ArrowLeft') {
+                e.preventDefault();
+            }
+            
+            // Ctrl + W (закрыть вкладку)
+            if (e.ctrlKey && e.key === 'w') {
+                e.preventDefault();
+            }
+            
+            // Ctrl + T (новая вкладка)
+            if (e.ctrlKey && e.key === 't') {
+                e.preventDefault();
+            }
+        });
+
+        // Добавляем состояние в историю, чтобы нельзя было вернуться
+        history.pushState(null, null, location.href);
+        
+        // Отправляем событие просмотра заглушки
+        function sendEndPageViewEvent() {
+            // Google Analytics
+            if (typeof gtag !== "undefined") {
+                gtag("event", "6245_end_page_view_var4");
+            }
+            
+            // Yandex Metrika
+            if (typeof ym !== "undefined") {
+                ym(96171108, "reachGoal", "6245_end_page_view_var4");
+            }
+        }
+        
+        // Отправляем событие при загрузке страницы
+        sendEndPageViewEvent();
+        // Блокируем все попытки навигации
+        setInterval(function() {
+            if (document.hidden) {
+                document.title = 'Только тсCC';
+            }
+        }, 100);
+    </script>
+</body>
+</html>
