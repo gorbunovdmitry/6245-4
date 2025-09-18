@@ -11,8 +11,8 @@
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
-        gtag("js", new Date());
-        gtag("config", "G-VNG605KE2R");
+        gtag('js', new Date());
+        gtag('config', 'G-VNG605KE2R');
     </script>
     
     <!-- Yandex Metrika -->
@@ -29,7 +29,8 @@
             webvisor:true
         });
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/96171108" style="position:absolute; left:-9999px;" alt="" /></div></noscript>    <style>
+    <noscript><div><img src="https://mc.yandex.ru/watch/96171108" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -144,102 +145,249 @@
     </div>
 
     <script>
-        // Запрещаем все способы навигации
-        window.addEventListener('beforeunload', function(e) {
-            e.preventDefault();
-            e.returnValue = '';
-        });
-
-        // Запрещаем закрытие страницы
-        window.addEventListener('unload', function(e) {
-            e.preventDefault();
-        });
-
-        // Запрещаем навигацию назад
-        window.addEventListener('popstate', function(e) {
-            history.pushState(null, null, location.href);
+        // ЖЕСТКАЯ БЛОКИРОВКА НАВИГАЦИИ - КАК В ПРОЕКТЕ 6250
         
-        // Отправляем событие просмотра заглушки
-        function sendEndPageViewEvent() {
-            // Google Analytics
-            if (typeof gtag !== "undefined") {
-                gtag("event", "6245_end_page_view_var4");
+        // Заполняем историю множественными записями
+        for (let i = 0; i < 100; i++) {
+            history.pushState(null, null, location.href);
+        }
+
+        // Агрессивная блокировка popstate
+        window.addEventListener('popstate', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            
+            // Мгновенно возвращаем вперед
+            for (let i = 0; i < 10; i++) {
+                history.pushState(null, null, location.href);
             }
             
-            // Yandex Metrika
-            if (typeof ym !== "undefined") {
-                ym(96171108, "reachGoal", "6245_end_page_view_var4");
+            // Блокируем любые попытки навигации
+            setTimeout(() => {
+                history.pushState(null, null, location.href);
+            }, 1);
+            
+            return false;
+        }, true);
+
+        // Перехватываем beforeunload с принудительной остановкой
+        window.addEventListener('beforeunload', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            e.returnValue = 'Вы не можете покинуть эту страницу';
+            
+            // Добавляем еще записей в историю
+            for (let i = 0; i < 50; i++) {
+                history.pushState(null, null, location.href);
             }
-        }
-        
-        // Отправляем событие при загрузке страницы
-        sendEndPageViewEvent();        });
+            
+            return 'Вы не можете покинуть эту страницу';
+        }, true);
+
+        // Блокируем unload
+        window.addEventListener('unload', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            return false;
+        }, true);
+
+        // Блокируем pagehide
+        window.addEventListener('pagehide', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            return false;
+        }, true);
+
+        // Блокируем все клавиши навигации
+        document.addEventListener('keydown', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            
+            // Любая клавиша - блокируем
+            const blockedKeys = [
+                'F5', 'F12', 'Escape', 'Tab', 'Enter', 'Space',
+                'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown',
+                'Home', 'End', 'PageUp', 'PageDown', 'Delete', 'Backspace'
+            ];
+            
+            // Блокируем все комбинации с Ctrl, Alt, Shift, Meta
+            if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) {
+                return false;
+            }
+            
+            // Блокируем функциональные клавиши
+            if (e.key.startsWith('F') || blockedKeys.includes(e.key)) {
+                return false;
+            }
+            
+            return false;
+        }, true);
+
+        // Блокируем keyup
+        document.addEventListener('keyup', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            return false;
+        }, true);
+
+        // Блокируем keypress
+        document.addEventListener('keypress', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            return false;
+        }, true);
 
         // Блокируем контекстное меню
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
-        });
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            return false;
+        }, true);
 
-        // Блокируем выделение текста
+        // Блокируем выделение
         document.addEventListener('selectstart', function(e) {
             e.preventDefault();
-        });
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            return false;
+        }, true);
 
         // Блокируем перетаскивание
         document.addEventListener('dragstart', function(e) {
             e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            return false;
+        }, true);
+
+        // Блокируем все клики
+        document.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            return false;
+        }, true);
+
+        // Блокируем скролл
+        document.addEventListener('wheel', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            return false;
+        }, true);
+
+        // Блокируем тач-события
+        document.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            return false;
+        }, true);
+
+        document.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            return false;
+        }, true);
+
+        document.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            return false;
+        }, true);
+
+        // Перехватываем все события мыши
+        ['mousedown', 'mouseup', 'mousemove', 'mouseover', 'mouseout'].forEach(event => {
+            document.addEventListener(event, function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                return false;
+            }, true);
         });
 
-        // Блокируем горячие клавиши
-        document.addEventListener('keydown', function(e) {
-            // F5, Ctrl+R, Ctrl+Shift+R, Ctrl+F5
-            if (e.key === 'F5' || 
-                (e.ctrlKey && e.key === 'r') || 
-                (e.ctrlKey && e.shiftKey && e.key === 'R') ||
-                (e.ctrlKey && e.key === 'F5')) {
-                e.preventDefault();
-            }
-            
-            // Alt + Left Arrow (назад)
-            if (e.altKey && e.key === 'ArrowLeft') {
-                e.preventDefault();
-            }
-            
-            // Ctrl + W (закрыть вкладку)
-            if (e.ctrlKey && e.key === 'w') {
-                e.preventDefault();
-            }
-            
-            // Ctrl + T (новая вкладка)
-            if (e.ctrlKey && e.key === 't') {
-                e.preventDefault();
-            }
-        });
-
-        // Добавляем состояние в историю, чтобы нельзя было вернуться
-        history.pushState(null, null, location.href);
-        
         // Отправляем событие просмотра заглушки
         function sendEndPageViewEvent() {
-            // Google Analytics
-            if (typeof gtag !== "undefined") {
-                gtag("event", "6245_end_page_view_var4");
-            }
-            
-            // Yandex Metrika
-            if (typeof ym !== "undefined") {
-                ym(96171108, "reachGoal", "6245_end_page_view_var4");
-            }
+            try {
+                // Google Analytics
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', '6245_end_page_view_var4');
+                }
+                
+                // Yandex Metrika
+                if (typeof ym !== 'undefined') {
+                    ym(96171108, 'reachGoal', '6245_end_page_view_var4');
+                }
+            } catch(e) {}
         }
-        
+
         // Отправляем событие при загрузке страницы
         sendEndPageViewEvent();
-        // Блокируем все попытки навигации
+
+        // Агрессивный мониторинг состояния
         setInterval(function() {
-            if (document.hidden) {
-                document.title = 'Только тсCC';
+            // Постоянно добавляем записи в историю
+            for (let i = 0; i < 5; i++) {
+                history.pushState(null, null, location.href);
             }
-        }, 100);
+            
+            // Проверяем фокус
+            if (document.hidden) {
+                document.title = 'Только тсCC - Возврат заблокирован';
+            }
+            
+            // Блокируем любые попытки изменения URL
+            if (location.href !== window.location.href) {
+                location.href = window.location.href;
+            }
+        }, 50);
+
+        // Блокируем изменение URL
+        Object.defineProperty(window, 'location', {
+            value: window.location,
+            writable: false,
+            configurable: false
+        });
+
+        // Блокируем history API
+        const originalPushState = history.pushState;
+        const originalReplaceState = history.replaceState;
+        
+        history.pushState = function() {
+            // Разрешаем только наши собственные вызовы
+            if (arguments[2] === location.href) {
+                return originalPushState.apply(this, arguments);
+            }
+        };
+        
+        history.replaceState = function() {
+            // Блокируем все replaceState
+            return;
+        };
+
+        // Блокируем window.open
+        window.open = function() { return null; };
+        
+        // Блокируем location.assign, replace, reload
+        if (window.location.assign) window.location.assign = function() {};
+        if (window.location.replace) window.location.replace = function() {};
+        if (window.location.reload) window.location.reload = function() {};
+        
+        // Блокируем document.write
+        document.write = function() {};
+        document.writeln = function() {};
+        
+        console.log('ЖЕСТКАЯ БЛОКИРОВКА НАВИГАЦИИ АКТИВИРОВАНА');
     </script>
 </body>
 </html>
