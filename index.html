@@ -12,8 +12,8 @@
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
-        gtag("js", new Date());
-        gtag("config", "G-VNG605KE2R");
+        gtag('js', new Date());
+        gtag('config', 'G-VNG605KE2R');
     </script>
     
     <!-- Yandex Metrika -->
@@ -30,8 +30,66 @@
             webvisor:true
         });
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/96171108" style="position:absolute; left:-9999px;" alt="" /></div></noscript></head>
+    <noscript><div><img src="https://mc.yandex.ru/watch/96171108" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    <!-- МГНОВЕННАЯ ПРОВЕРКА ЗАВЕРШЕНИЯ ФЛОУ -->
+    <script>
+        (function() {
+            // Проверяем состояние флоу ДО загрузки страницы
+            try {
+                const flowCompleted = 
+                    localStorage.getItem('6245_flow_completed') ||
+                    sessionStorage.getItem('6245_flow_completed') ||
+                    document.cookie.includes('6245_flow_completed=true');
+                    
+                if (flowCompleted) {
+                    console.log('Флоу уже завершен - мгновенное перенаправление');
+                    
+                    // Мгновенно перенаправляем БЕЗ отображения страницы
+                    window.location.replace('stub.html');
+                    
+                    // Дополнительная защита - скрываем body
+                    document.addEventListener('DOMContentLoaded', function() {
+                        document.body.style.display = 'none';
+                    });
+                    
+                    // Если по какой-то причине не сработало - принудительно перенаправляем
+                    setTimeout(function() {
+                        window.location.href = 'stub.html';
+                    }, 100);
+                }
+            } catch (error) {
+                console.log('Ошибка проверки флоу:', error);
+            }
+        })();
+    </script>
+</head>
 <body>
+    <!-- ЗАЩИТА ОТ МЕЛЬКАНИЯ КОНТЕНТА -->
+    <script>
+        // Еще одна проверка в начале body
+        (function() {
+            try {
+                const flowCompleted = 
+                    localStorage.getItem('6245_flow_completed') ||
+                    sessionStorage.getItem('6245_flow_completed') ||
+                    document.cookie.includes('6245_flow_completed=true');
+                    
+                if (flowCompleted) {
+                    // Немедленно скрываем всю страницу
+                    document.body.style.display = 'none';
+                    document.body.style.visibility = 'hidden';
+                    
+                    // Принудительно перенаправляем
+                    window.location.replace('stub.html');
+                    return;
+                }
+            } catch (error) {
+                console.log('Ошибка проверки в body:', error);
+            }
+        })();
+    </script>
+    
     <div class="container">
         <div class="text-block">
             <h2 class="text-block-title">Получайте оплату, не&nbsp;доставая телефон</h2>
