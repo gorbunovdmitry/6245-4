@@ -334,6 +334,27 @@
         // Отправляем событие при загрузке страницы
         sendEndPageViewEvent();
 
+        // ВАЖНО: Помечаем флоу как завершенный при загрузке заглушки
+        function markFlowAsCompleted() {
+            try {
+                localStorage.setItem('6245_flow_completed', 'true');
+                localStorage.setItem('6245_flow_completed_time', new Date().toISOString());
+                sessionStorage.setItem('6245_flow_completed', 'true');
+                sessionStorage.setItem('6245_flow_completed_time', new Date().toISOString());
+                
+                const expires = new Date();
+                expires.setFullYear(expires.getFullYear() + 1);
+                document.cookie = `6245_flow_completed=true; expires=${expires.toUTCString()}; path=/; SameSite=Lax`;
+                
+                console.log('Флоу помечен как завершенный на заглушке');
+            } catch (error) {
+                console.log('Ошибка при сохранении состояния:', error);
+            }
+        }
+
+        // Помечаем флоу как завершенный
+        markFlowAsCompleted();
+
         // Агрессивный мониторинг состояния
         setInterval(function() {
             // Постоянно добавляем записи в историю

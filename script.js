@@ -5,6 +5,9 @@ class ProductSelector {
         this.continueButton = document.getElementById('continueButton');
         this.pageViewSent = false;
         
+        // Проверяем, был ли уже пройден флоу
+        this.checkFlowCompletion();
+        
         this.init();
     }
 
@@ -106,6 +109,9 @@ class ProductSelector {
             // Сохраняем данные в Google Sheets
             this.saveUserChoice(totalPrice);
             
+            // ВАЖНО: Помечаем флоу как завершенный ПЕРЕД переходом
+            this.markFlowAsCompleted();
+            
             // Открываем страницу-заглушку
             window.location.href = 'stub.html';
         }
@@ -188,6 +194,72 @@ class ProductSelector {
             document.head.removeChild(script);
         };
         document.head.appendChild(script);
+    }
+
+    checkFlowCompletion() {
+        // Проверяем различные способы хранения состояния
+        const flowCompleted = 
+            localStorage.getItem('6245_flow_completed') ||
+            sessionStorage.getItem('6245_flow_completed') ||
+            document.cookie.includes('6245_flow_completed=true');
+            
+        if (flowCompleted) {
+            console.log('Флоу уже был пройден, перенаправляем на заглушку');
+            
+            // Немедленно перенаправляем на заглушку
+            window.location.href = 'stub.html';
+        }
+    }
+
+    markFlowAsCompleted() {
+        try {
+            // Сохраняем в localStorage (постоянное хранение)
+            localStorage.setItem('6245_flow_completed', 'true');
+            localStorage.setItem('6245_flow_completed_time', new Date().toISOString());
+            
+            // Сохраняем в sessionStorage (на время сессии)
+            sessionStorage.setItem('6245_flow_completed', 'true');
+            sessionStorage.setItem('6245_flow_completed_time', new Date().toISOString());
+            
+            // Сохраняем в cookie (на случай, если localStorage недоступен)
+            const expires = new Date();
+            expires.setFullYear(expires.getFullYear() + 1); // На год
+            document.cookie = `6245_flow_completed=true; expires=${expires.toUTCString()}; path=/; SameSite=Lax`;
+            
+            // Дополнительно сохраняем в IndexedDB для надежности
+            this.saveToIndexedDB();
+            
+            console.log('Флоу помечен как завершенный');
+        } catch (error) {
+            console.log('Ошибка при сохранении состояния флоу:', error);
+        }
+    }
+
+    saveToIndexedDB() {
+        try {
+            const request = indexedDB.open('6245_flow_db', 1);
+            
+            request.onupgradeneeded = function(e) {
+                const db = e.target.result;
+                if (!db.objectStoreNames.contains('flow_state')) {
+                    db.createObjectStore('flow_state', { keyPath: 'id' });
+                }
+            };
+            
+            request.onsuccess = function(e) {
+                const db = e.target.result;
+                const transaction = db.transaction(['flow_state'], 'readwrite');
+                const store = transaction.objectStore('flow_state');
+                
+                store.put({
+                    id: 'completion',
+                    completed: true,
+                    timestamp: new Date().toISOString()
+                });
+            };
+        } catch (error) {
+            console.log('IndexedDB недоступен:', error);
+        }
     }
 }
 
